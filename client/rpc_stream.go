@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"sync"
 
@@ -86,6 +87,7 @@ func (r *rpcStream) Recv(msg interface{}) error {
 	r.Unlock()
 	err := r.codec.ReadHeader(&resp, codec.Response)
 	r.Lock()
+	fmt.Printf("RPC stream Recv: %+v\n", resp)
 	if err != nil {
 		if err == io.EOF && !r.isClosed() {
 			r.err = io.ErrUnexpectedEOF

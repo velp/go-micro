@@ -138,6 +138,7 @@ func (c *protoCodec) ReadHeader(m *codec.Message, mt codec.MessageType) error {
 		m.Id = fmt.Sprintf("%d", rtmp.GetSeq())
 	case codec.Response:
 		data, err := ReadNetString(c.rwc)
+		fmt.Printf("ReadNetString return data: %+v and err: %+v\n", data, err)
 		if err != nil {
 			return err
 		}

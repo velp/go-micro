@@ -2,6 +2,7 @@ package protorpc
 
 import (
 	"encoding/binary"
+	fmt "fmt"
 	"io"
 )
 
@@ -21,6 +22,7 @@ func ReadNetString(r io.Reader) (data []byte, err error) {
 	sizeBuf := make([]byte, 4)
 	_, err = r.Read(sizeBuf)
 	if err != nil {
+		fmt.Printf("ReadNetString error until Read by sizeBuf\n")
 		return nil, err
 	}
 	size := binary.BigEndian.Uint32(sizeBuf)
@@ -30,6 +32,7 @@ func ReadNetString(r io.Reader) (data []byte, err error) {
 	data = make([]byte, size)
 	_, err = r.Read(data)
 	if err != nil {
+		fmt.Printf("ReadNetString error until Read data\n")
 		return nil, err
 	}
 	return
